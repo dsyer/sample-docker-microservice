@@ -15,11 +15,12 @@ COPY --from=build  /opt/jdk/jdk-17 /opt/jdk
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 COPY target/sample-docker-microservice-1.0-SNAPSHOT.jar /opt/app/app.jar
-RUN java -jar /opt/app/app.jar --thin.dryrun --thin.root=/opt/app
+RUN java -jar /opt/app/app.jar --thin.classpath --thin.root=/opt/app > /opt/app/classpath
 
 FROM alpine:latest
 COPY --from=build  /springboot-runtime /opt/jdk
 COPY --from=dependencies  /opt/app/repository /opt/app/repository
 COPY --from=dependencies  /opt/app/app.jar /opt/app
+COPY --from=dependencies  /opt/app/classpath /opt/app
 ENV PATH=$PATH:/opt/jdk/bin
-CMD ["sh", "-c", "java -showversion -cp $(java -jar /opt/app/app.jar --thin.classpath --thin.root=/opt/app) pl.piomin.microservices.person.Application"]
+CMD ["sh", "-c", "java -showversion -cp $(cat /opt/app/classpath) pl.piomin.microservices.person.Application"]
