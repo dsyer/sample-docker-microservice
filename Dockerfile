@@ -22,4 +22,4 @@ COPY --from=build  /springboot-runtime /opt/jdk
 COPY --from=dependencies  /opt/app/repository /opt/app/repository
 COPY --from=dependencies  /opt/app/app.jar /opt/app
 ENV PATH=$PATH:/opt/jdk/bin
-CMD ["java", "-showversion", "-jar", "/opt/app/app.jar", "--thin.root=/opt/app"]
+CMD ["sh", "-c", "java -showversion -cp $(java -jar /opt/app/app.jar --thin.classpath --thin.root=/opt/app) pl.piomin.microservices.person.Application"]
