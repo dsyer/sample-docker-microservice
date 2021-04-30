@@ -1,0 +1,105 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Application",
+            "request": "launch",
+            "mainClass": "pl.piomin.microservices.person.Application",
+            "projectName": "sample-docker-microservice"
+        },
+        {
+            "type": "java",
+            "request": "attach",
+            "name": "Attach by port",
+            "hostName": "localhost",
+            "port": "5005"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch BootApplication",
+            "request": "launch",
+            "mainClass": "com.example.boot.BootApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.demo.DemoApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch RestConfiguration",
+            "request": "launch",
+            "mainClass": "com.example.demo.RestConfiguration",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch EmptyApplication",
+            "request": "launch",
+            "mainClass": "com.example.empt.EmptyApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch BuncApplication",
+            "request": "launch",
+            "mainClass": "com.example.func.BuncApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch CuncApplication",
+            "request": "launch",
+            "mainClass": "com.example.func.CuncApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch FuncApplication",
+            "request": "launch",
+            "mainClass": "com.example.func.FuncApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualApplication",
+            "request": "launch",
+            "mainClass": "com.example.manual.ManualApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch MicroApplication",
+            "request": "launch",
+            "mainClass": "com.example.micro.MicroApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch MiniApplication",
+            "request": "launch",
+            "mainClass": "com.example.mini.MiniApplication",
+            "projectName": "micro"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReactorApplication",
+            "request": "launch",
+            "mainClass": "com.example.reactor.ReactorApplication",
+            "projectName": "micro"
+        }
+    ]
+}
