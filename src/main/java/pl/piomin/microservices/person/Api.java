@@ -2,8 +2,9 @@ package pl.piomin.microservices.person;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/persons")
 public class Api {
 
-	protected Logger logger = Logger.getLogger(Api.class.getName());
+	protected Logger logger = LoggerFactory.getLogger(Api.class.getName());
 	
 	private List<Person> persons;
 	
