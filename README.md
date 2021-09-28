@@ -16,8 +16,7 @@ $ jlink --compress=2 --module-path ${JAVA_HOME}/jmods --add-modules "${MODS}" --
 Run the app:
 
 ```
-$ ./target/thin/bin/java -cp ${CP} pl.piomin.microservices.person
-.Application
+$ ./target/thin/bin/java -cp ${CP} pl.piomin.microservices.person.Application
 ```
 
 The `Dockerfile` in the root of the project does the last bit for you and takes a step further by also setting up App CDS.
@@ -42,3 +41,26 @@ The biggest chunks in there are:
 * CDS cache, 69MB
 
 (Original idea by @piomin.)
+
+## Modules Used
+
+The `MODS` generated above from `jdeps` looks like quite a long list:
+
+```
+java.base,java.desktop,java.instrument,java.management,java.naming,java.prefs,java.rmi,java.scripting,java.sql,jdk.httpserver,jdk.jfr,jdk.unsupported
+```
+
+Spring 6 will get rid of `java.desktop` (the Java Beans dependency). You can slim that down to
+
+```
+java.base,java.desktop,java.naming
+```
+
+and get an app to run with warnings (because `java.management` is missing). Without `java.naming` you get errors in Spring:
+
+```
+Caused by: java.lang.NoClassDefFoundError: javax/naming/NamingException
+        at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.<init>(CommonAnnotationBeanPostProcessor.java:177) ~[spring-context-5.3.10.jar:5.3.10]
+```
+
+The `pom.xml` excludes `snakeyaml`. If you don't do that you also need `java.logging`.

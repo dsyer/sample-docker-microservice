@@ -3,7 +3,7 @@ RUN ln -s $JAVA_HOME /opt/jdk
 ENV JAVA_HOME /opt/jdk
 RUN ["jlink", "--compress=2", "--module-path", \
      "$JAVA_HOME/jmods/", "--add-modules", \
-     "java.base,java.desktop,java.instrument,java.management,java.naming,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql,jdk.httpserver,jdk.jfr,jdk.unsupported", \
+     "java.base,java.desktop,java.naming,java.management", \
      "--no-header-files", "--no-man-pages", \
      "--output", "/springboot-runtime"]
 
