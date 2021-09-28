@@ -22,6 +22,23 @@ $ ./target/thin/bin/java -cp ${CP} pl.piomin.microservices.person
 
 The `Dockerfile` in the root of the project does the last bit for you and takes a step further by also setting up App CDS.
 
-The docker image is about 160MB.
+The docker image is about 160MB:
+
+```
+Cmp   Size  Command                                                                       
+    5.6 MB  FROM 695e5153d90d6a4                                                          
+     65 MB  COPY /springboot-runtime /opt/jdk # buildkit                                  
+     31 MB  COPY /opt/app/repository /opt/app/repository # buildkit                       
+     13 kB  COPY /opt/app/app.jar /opt/app # buildkit                                     
+    691 kB  COPY /opt/app/app.classlist /opt/app # buildkit                               
+    4.1 kB  COPY /opt/app/classpath /opt/app # buildkit                                   
+     69 MB  RUN /bin/sh -c java -Xshare:dump -XX:SharedClassListFile=/opt/app...
+```
+
+The biggest chunks in there are:
+
+* Java runtime, 65MB
+* Jar files, 31MB (could probably be slimmed down)
+* CDS cache, 69MB
 
 (Original idea by @piomin.)
