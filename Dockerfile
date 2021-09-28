@@ -1,8 +1,14 @@
 FROM amazoncorretto:17-alpine-jdk AS build
-RUN ["/bin/sh", "-c", "jlink --compress=2 --module-path ${JAVA_HOME}/jmods/ --add-modules java.base,java.desktop,java.instrument,java.management,java.naming,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql,jdk.httpserver,jdk.jfr,jdk.unsupported --no-header-files --no-man-pages --output /springboot-runtime"]
+RUN ln -s $JAVA_HOME /opt/jdk
+ENV JAVA_HOME /opt/jdk
+RUN ["jlink", "--compress=2", "--module-path", \
+     "$JAVA_HOME/jmods/", "--add-modules", \
+     "java.base,java.desktop,java.instrument,java.management,java.naming,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql,jdk.httpserver,jdk.jfr,jdk.unsupported", \
+     "--no-header-files", "--no-man-pages", \
+     "--output", "/springboot-runtime"]
 
 FROM alpine:latest AS dependencies
-COPY --from=build  /usr/lib/jvm/default-jvm /opt/jdk
+COPY --from=build  /opt/jdk /opt/jdk
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 COPY target/sample-docker-microservice-1.0-SNAPSHOT.jar /opt/app/app.jar
