@@ -53,10 +53,14 @@ java.base,java.desktop,java.instrument,java.management,java.naming,java.prefs,ja
 Spring 6 will get rid of `java.desktop` (the Java Beans dependency). You can slim that down to
 
 ```
-java.base,java.desktop,java.naming
+java.base,java.desktop
 ```
 
-and get an app to run with warnings (because `java.management` is missing). Without `java.naming` you get errors in Spring:
+and get an app to run with warnings (because `java.management` is missing).
+
+## Older Notes
+
+Before Spring Boot 2.7 without `java.naming` you get errors in Spring:
 
 ```
 Caused by: java.lang.NoClassDefFoundError: javax/naming/NamingException
