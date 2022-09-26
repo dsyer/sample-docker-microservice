@@ -3,7 +3,7 @@
   "dockerFile": "Dockerfile",
   "build": {
     "args": {
-      "USER": "${env:USER}",
+      "USER": "vscode",
       "USER_ID": 1000, // VSCode adjusts the IDs when it builds
       "USER_GID": 1000
     }
@@ -22,7 +22,9 @@
     "--mount",
     "type=bind,source=${env:HOME}/.m2,target=${env:HOME}/.m2"
   ],
-  "remoteUser": "${env:USER}",
+  "initializeCommand": "mkdir -p ${env:HOME}/.m2 ${env:HOME}/.vscode ${env:HOME}/.ssh",
+	"postCreateCommand": "sudo chown vscode:vscode /home/vscode/.m2 /home/vscode/.vscode /home/vscode/.ssh",
+  "remoteUser": "vscode",
 
   // Use 'settings' to set *default* container specific settings.json values on container create.
   // You can edit these settings after create using File > Preferences > Settings > Remote.
@@ -42,5 +44,8 @@
   // "postCreateCommand": "java -version",
 
   // Add the IDs of extensions you want installed when the container is created in the array below.
-  "extensions": ["vscjava.vscode-java-pack"]
+  "extensions": ["vscjava.vscode-java-pack"],
+  "features": {
+		"docker-in-docker": "latest"
+	}
 }

@@ -1,5 +1,4 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "terminal.integrated.shell.linux": "/bin/sh",
     "java.debug.settings.hotCodeReplace": "auto"
 }
